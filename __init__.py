@@ -1,1 +1,1 @@
-from python_image import load_image_dir
+from python_image.image import load_image_dir
