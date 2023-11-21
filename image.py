@@ -2,11 +2,11 @@ from pathlib import Path
 from typing import Union
 
 import cv2
-from python_assert import assert_dir
+from assertpy.assertpy import assert_that
 
 
 def load_image_dir(path: Union[Path, str], flag: int = cv2.IMREAD_COLOR):
-    assert_dir(path)
+    assert_that(path).is_directory().is_readable()
 
     path = Path(path)
     supported_formats = (
