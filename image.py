@@ -1,3 +1,4 @@
+import types
 from pathlib import Path
 from typing import Union
 
@@ -36,3 +37,17 @@ def load_image_dir(
             continue
 
         yield cv2.imread(str(file), flag)
+
+
+def write_images_to_dir(
+    images: Union[list, types.GeneratorType],
+    target_path: Union[Path, str],
+    n_digits: int = 5,
+    start: int = 0,
+):
+    target_path = Path(target_path)
+
+    for i, image in enumerate(images, start=start):
+        output_path = target_path / f"{i}:0{n_digits}"
+
+        cv2.imwrite(str(output_path), image)
