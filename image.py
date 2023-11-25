@@ -5,7 +5,9 @@ import cv2
 from assertpy.assertpy import assert_that
 
 
-def load_image_dir(path: Union[Path, str], flag: int = cv2.IMREAD_COLOR):
+def load_image_dir(
+    path: Union[Path, str], flag: int = cv2.IMREAD_COLOR, sort: bool = False
+):
     assert_that(path).is_directory().is_readable()
 
     path = Path(path)
@@ -29,7 +31,7 @@ def load_image_dir(path: Union[Path, str], flag: int = cv2.IMREAD_COLOR):
         ".exr",
     )
 
-    for file in path.iterdir():
+    for file in (sorted(path) if sort else path).iterdir():
         if not file.is_file or not file.suffix in supported_formats:
             continue
 
